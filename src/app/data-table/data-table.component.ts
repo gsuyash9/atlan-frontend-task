@@ -1,5 +1,6 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table'
+
+import { Component} from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -7,69 +8,47 @@ import {MatTableDataSource} from '@angular/material/table'
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements OnInit {
+export class DataTableComponent {
 
   selectedValue2!: string;
   selectedValue1!: string;
-  queryString!:string;
+  queryString!: string;
 
-  constructor() { 
-    // this.dataSource.filterPredicate = (data: any, filter: any): boolean => (
-    //   data.name.toLowerCase().includes(filter) ||
-    //   data.symbol.toLowerCase().includes(filter) ||
-    //   data.position.toString() === filter
-    // );
+  constructor() {
   }
-  filterValue!:string;
-  ngOnInit(): void {
-    // this.dataSource.filterPredicate = (data: any, filter: any): boolean => (
-    //   data.name.toLowerCase().includes(filter) ||
-    //   data.symbol.toLowerCase().includes(filter) ||
-    //   data.position.toString() === filter||
-    //   console.log("test2")
-    // );
 
-    this.dataSource.filter = this.filterValue;
-  }
-  
-  applyFilter(event: any) {
-    console.log("filterValue: ",event.target.value)
-    this.filterValue = event.target.value;
-    this.filterValue = this.filterValue.trim(); // Remove whitespace
-    this.filterValue = this.filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = event.target.value.trim().toLowerCase();
-    console.log("dataSource filter ",this.dataSource)
+
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource:any = ELEMENT_DATA;
-  Select1(listItem: number){
-    if(listItem == 1)
-    {
-      this.dataSource = ELEMENT_DATA;
-      console.log("datasource: ", this.dataSource);
+  dataSource: any = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  Select1(listItem: number) {
+    if (listItem == 1) {
+      this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
       this.displayedColumns = ['position', 'name', 'weight', 'symbol'];
     }
-    else if(listItem == 2)
-    {
-      this.dataSource =PEOPLE_DATA;
+    else if (listItem == 2) {
+      this.dataSource = new MatTableDataSource<People>(PEOPLE_DATA);
       this.displayedColumns = ['position', 'name', 'age', 'initials'];
     }
-    else if(listItem == 3)
-    {
-      this.dataSource = EMPLOYEE_DATA;
-      this.displayedColumns = ['Id', 'FirstName', 'LastName', 'Email','Gender','JobTitle'];
+    else if (listItem == 3) {
+      this.dataSource = new MatTableDataSource<Employee>(EMPLOYEE_DATA);
+      this.displayedColumns = ['Id', 'FirstName', 'LastName', 'Email', 'Gender', 'JobTitle'];
     }
   }
 
 
 }
 export interface Employee {
-  Id : number,	
-  FirstName:string,	
-  LastName:string,	
-  Email:string,
-  Gender:string,	
-  JobTitle:string
+  Id: number,
+  FirstName: string,
+  LastName: string,
+  Email: string,
+  Gender: string,
+  JobTitle: string
 }
 
 export interface PeriodicElement {
@@ -87,32 +66,32 @@ export interface People {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
+  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
+  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
+  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
+  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
+  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
+  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
+  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
+  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
 ];
 
 const PEOPLE_DATA: People[] = [
-  {position: 1, name: 'Ben', age: 46, initials: 'BG'},
-  {position: 2, name: 'Hugo', age: 9, initials: 'HG'},
-  {position: 3, name: 'Theo', age: 6, initials: 'TG'},
-  {position: 4, name: 'Emy', age: 42, initials: 'EC'},
-  {position: 5, name: 'Wamwam', age: 24, initials: 'BB'},
-  {position: 6, name: 'Defre', age: 12, initials: 'FK'},
-  {position: 7, name: 'Zakk', age: 56, initials: 'ZW'},
-  {position: 8, name: 'Ned', age: 61, initials: 'NF'},
-  {position: 9, name: 'Tryphon', age: 91, initials: 'TT'},
-  {position: 10, name: 'Misrilou', age: 19, initials: 'MF'},
+  { position: 1, name: 'Ben', age: 46, initials: 'BG' },
+  { position: 2, name: 'Hugo', age: 9, initials: 'HG' },
+  { position: 3, name: 'Theo', age: 6, initials: 'TG' },
+  { position: 4, name: 'Emy', age: 42, initials: 'EC' },
+  { position: 5, name: 'Wamwam', age: 24, initials: 'BB' },
+  { position: 6, name: 'Defre', age: 12, initials: 'FK' },
+  { position: 7, name: 'Zakk', age: 56, initials: 'ZW' },
+  { position: 8, name: 'Ned', age: 61, initials: 'NF' },
+  { position: 9, name: 'Tryphon', age: 91, initials: 'TT' },
+  { position: 10, name: 'Misrilou', age: 19, initials: 'MF' },
 ];
 
-const EMPLOYEE_DATA : Employee[] =[{
+const EMPLOYEE_DATA: Employee[] = [{
   Id: 1, FirstName: "Johannah", LastName: "Kiffin", Email: "jkiffin0@google.pl", Gender: "F",
   JobTitle: "Administrative Assistant I"
 }, {

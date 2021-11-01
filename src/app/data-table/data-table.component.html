@@ -30,7 +30,7 @@
   </div>
   <div class ="column-select" style="display:inline-block">
     <mat-form-field appearance="fill">
-      <input matInput placeholder="=" (keyup)="applyFilter($event)" >
+      <input matInput #filterInput placeholder="=" (keyup)="applyFilter($event)" >
     </mat-form-field>
   </div>
 </section>
