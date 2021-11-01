@@ -12,6 +12,6 @@
 
 
 ## Steps taken to improve page load time
-  *I used Angular material for most of the UI, that improved a lot of speed and decreased the bundle size.
-  *I also reduces bundle sizes by eleminating unused css and JavaScript.
-  *Using formats like .webp helps optimize the images a lot but for now I have used .png images, and as they are single coloured, they are quite smaller than jpeg.
+ - I used Angular material for most of the UI, that improved a lot of speed and decreased the bundle size.
+ - I also reduces bundle sizes by eleminating unused css and JavaScript.
+ - Using formats like .webp helps optimize the images a lot but for now I have used .png images, and as they are single coloured, they are quite smaller than jpeg.
